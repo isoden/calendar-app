@@ -1,3 +1,23 @@
-<p>
-  calendar works!
-</p>
+{{ activeDate | date: 'yyyy/M' }}
+<button (click)="onNavigate(-1)">前月</button>
+<button (click)="onNavigate(1)">次月</button>
+<table>
+  <thead>
+    <tr>
+      <td>日</td>
+      <td>月</td>
+      <td>火</td>
+      <td>水</td>
+      <td>木</td>
+      <td>金</td>
+      <td>土</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let datesOfWeek of datesOfWeeks">
+      <td *ngFor="let date of datesOfWeek">
+        {{ date.date | date: 'd' }}
+      </td>
+    </tr>
+  </tbody>
+</table>
