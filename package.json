@@ -7,8 +7,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "dev": "concurrently --raw \"npm start\" \"wait-on http-get://localhost:4200 && electron .\"",
+    "package": "build",
+    "prepackage": "npm run build"
   },
+  "main": "main.js",
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
@@ -20,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "core-js": "^2.5.4",
+    "electron-is-dev": "^1.1.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
@@ -32,7 +37,9 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
-    "codelyzer": "~4.5.0",
+    "concurrently": "^4.1.0",
+    "electron": "^5.0.0",
+    "electron-builder": "^20.39.0",
     "husky": "^2.2.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -46,7 +53,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.2.2",
+    "wait-on": "^3.2.0"
   },
   "repository": {
     "type": "git",
@@ -60,6 +68,18 @@
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "author": "yuisoda",
+  "build": {
+    "appId": "dev.isoden.calendar-app",
+    "files": [
+      "**/*",
+      "dist/**/*"
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "dist"
     }
   }
 }
